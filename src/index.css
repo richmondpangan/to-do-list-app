@@ -1,75 +1,129 @@
-body {
-  background-color: darkslategrey;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: monospace, sans-serif;
+}
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: seagreen;
+  padding: 10px;
 }
 
 .to-do-list {
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
-  margin-top: 100px;
+  width: 100%;
+  max-width: 540px;
+  background-color: white;
+  margin: 100px auto 20px;
+  padding: 40px 30px 70px;
+  border-radius: 10px;
 }
 
-h1 {
-  font-size: 4rem;
-  color: white;
+.label {
+  font-size: 2rem;
+  color: black;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-button {
-  font-size: 1.7rem;
-  font-weight: bold;
-  padding: 10px 20px;
-  color: white;
+.notebook-icon-img {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: whitesmoke;
+  border-radius: 30px;
+  padding-left: 20px;
+  margin-bottom: 25px;
+}
+
+.task-input-field {
+  flex: 1;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.5 ease;
+  outline: none;
+  background: transparent;
+  padding: 10px;
 }
 
 .add-button {
-  background-color: lightgreen;
+  border: none;
+  outline: none;
+  padding: 16px 50px;
+  background-color: seagreen;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 40px;
 }
 
 .add-button:hover {
   background-color: green;
 }
 
+ul li {
+  list-style: none;
+  font-size: 18px;
+  padding: 12px 8px 12px 50px;
+  user-select: none;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 8px;
+}
+
+ul li::before {
+  content: '';
+  position: absolute;
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  background-image: url("./assets/uncheck.png");
+  background-size: cover;
+  background-position: center;
+  top: 11px;
+  left: 8px;
+}
+
+ul li.checked {
+  color: gray;
+  text-decoration: line-through;
+}
+
+ul li.checked::before {
+  background-image: url("./assets/check.png");
+}
+
 .delete-button {
-  background-color: orange;
+  position: absolute;
+  right: 0;
+  top: 5px;
+  width: 40px;
+  height: 40px;
+  font-size: 22px;
+  line-height: 40px;
+  text-align: center;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s ease;
 }
 
 .delete-button:hover {
-  background-color: red;
+  background-color: black;
 }
 
-.input[type="text"] {
-  font-size: 1.6rem;
-  padding: 10px;
-  border: 2px solid gray;
-  border-radius: 5px;
-  color: black;
-}
-
-ol {
-  padding: 0;
-}
-
-li {
-  font-size: 2rem;
-  font-weight: bold;
-  padding: 15px;
-  background-color: whitesmoke;
-  margin-bottom: 10px;
-  border: 3px solid lightgray;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
+.delete-button-img {
+  width: 40px;
+  height: 40px;
 }
 
 .text {
   flex: 1; 
-}
-
-.delete-button, .move-button {
-  padding: 8px 12px;
-  font-size: 1.4 rem;
-  margin-left: 10px;
 }
