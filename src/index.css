@@ -6,15 +6,19 @@
 }
 
 .container {
+  background-image: url(assets/background.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
   width: 100%;
   min-height: 100vh;
-  background-color: seagreen;
   padding: 10px;
 }
 
 .to-do-list {
   width: 100%;
-  max-width: 540px;
+  max-width: 1000px;
   background-color: white;
   margin: 100px auto 20px;
   padding: 40px 30px 70px;
@@ -22,7 +26,7 @@
 }
 
 .label {
-  font-size: 2rem;
+  font-size: 40px;
   color: black;
   display: flex;
   align-items: center;
@@ -51,6 +55,7 @@
   outline: none;
   background: transparent;
   padding: 10px;
+  font-size: 20px;
 }
 
 .add-button {
@@ -59,7 +64,7 @@
   padding: 16px 50px;
   background-color: seagreen;
   color: white;
-  font-size: 16px;
+  font-size: 20px;
   cursor: pointer;
   border-radius: 40px;
 }
@@ -70,7 +75,7 @@
 
 ul li {
   list-style: none;
-  font-size: 18px;
+  font-size: 20px;
   padding: 12px 8px 12px 50px;
   user-select: none;
   cursor: pointer;
@@ -100,6 +105,38 @@ ul li.checked::before {
   background-image: url("./assets/check.png");
 }
 
+.move-down-button {
+  position: absolute;
+  right: 100px;
+  top: 5px;
+  width: 40px;
+  height: 40px;
+  font-size: 22px;
+  line-height: 40px;
+  text-align: center;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.4s ease;
+  background-color: white;
+}
+
+.move-up-button {
+  position: absolute;
+  right: 50px;
+  top: 5px;
+  width: 40px;
+  height: 40px;
+  font-size: 22px;
+  line-height: 40px;
+  text-align: center;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.4s ease;
+  background-color: white;
+}
+
 .delete-button {
   position: absolute;
   right: 0;
@@ -112,16 +149,24 @@ ul li.checked::before {
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  transition: 0.2s ease;
+  transition: 0.4s ease;
+  background-color: white;
 }
 
-.delete-button:hover {
-  background-color: black;
+.move-down-button:hover, .move-up-button:hover, .delete-button:hover {
+  background-color: lightgray;
+}
+
+.move-down-button-img, .move-up-button-img{
+  margin-top: 5px;
+  width: 30px;
+  height: 30px;
 }
 
 .delete-button-img {
-  width: 40px;
-  height: 40px;
+  margin-top: 8px;
+  width: 25px;
+  height: 25px;
 }
 
 .text {
