@@ -27,6 +27,7 @@ function TodoList() {
         const listItem = event.currentTarget;
         if (event.target.tagName === 'LI') {
             listItem.classList.toggle('checked');
+            saveData();
         }
     }
 
