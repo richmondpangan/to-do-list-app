@@ -1,79 +1,108 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react';
+import { FaRegCircle, FaRegCircleCheck } from "react-icons/fa6";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
-function TodoList() {
-    const [tasks, setTasks] = useState([]);
-    const [newTask, setNewTask] = useState("");
+function App() {
+  const [tasks, setTasks] = useState([]);
+  const [taskInput, setTaskInput] = useState('');
+  const [editingIndex, setEditingIndex] = useState(null);
 
-    function handleInputChange(event) {
-        setNewTask(event.target.value);
+  // Load tasks from local storage
+  useEffect(() => {
+    const storedTasks = JSON.parse(localStorage.getItem('tasks'));
+    if (storedTasks) {
+      setTasks(storedTasks);
     }
+  }, []);
 
-    // Add a new task
-    function addTask() {
-        if (newTask.trim() !== "") {
-            setTasks(t => [...t, newTask]);
-            setNewTask("");
-        }
+  // Update local storage with tasks
+  const updateLocalStorage = (updatedTasks) => {
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+  };
+
+  // Add a new task
+  const handleAddTask = () => {
+    if (taskInput.trim() !== '') {
+      if (editingIndex !== null) {
+        const updatedTasks = [...tasks];
+        updatedTasks[editingIndex] = { text: taskInput, checked: tasks[editingIndex].checked };
+        setTasks(updatedTasks);
+        updateLocalStorage(updatedTasks);
+        setTaskInput('');
+        setEditingIndex(null);
+      } else {
+        const updatedTasks = [...tasks, { text: taskInput, checked: false }];
+        setTasks(updatedTasks);
+        updateLocalStorage(updatedTasks);
+        setTaskInput('');
+      }
     }
+  };
 
-    // Delete a task
-    function deleteTask(index) {
-        const udpatedTasks = tasks.filter((_, i) => i !== index);
-        setTasks(udpatedTasks);
-    }
+  // Edit an existing task
+  const handleEditTask = (index) => {
+    setTaskInput(tasks[index].text);
+    setEditingIndex(index);
+  };
 
-    // To check or uncheck a task
-    function handleItemClick(event) {
-        const listItem = event.currentTarget;
-        if (event.target.tagName === 'LI') {
-            listItem.classList.toggle('checked');
-            saveData();
-        }
-    }
+  // Delete an existing task
+  const handleDeleteTask = (index) => {
+    const updatedTasks = [...tasks];
+    updatedTasks.splice(index, 1);
+    setTasks(updatedTasks);
+    updateLocalStorage(updatedTasks);
+  };
 
-    function moveTaskUp(index) {
-        if (index > 0) {
-            const udpatedTasks = [...tasks];
-            [udpatedTasks[index], udpatedTasks[index - 1]] = [udpatedTasks[index - 1], udpatedTasks[index]];
-            setTasks(udpatedTasks);
-        }
-    }
+  // To check or uncheck a task
+  const handleToggleTask = (index) => {
+    const updatedTasks = [...tasks];
+    updatedTasks[index] = { ...updatedTasks[index], checked: !updatedTasks[index].checked };
+    setTasks(updatedTasks);
+    updateLocalStorage(updatedTasks);
+  };
 
-    function moveTaskDown(index) {
-        if (index < tasks.length - 1) {
-            const udpatedTasks = [...tasks];
-            [udpatedTasks[index], udpatedTasks[index + 1]] = [udpatedTasks[index + 1], udpatedTasks[index]];
-            setTasks(udpatedTasks);
-        }
-    }
-
-    return(
-        <div className='container'>
-            <div className='to-do-list'>
-                <h1 className='label'>To-Do-List <img src="./src/assets/notebook-icon.png" alt="notebook-icon" className='notebook-icon-img' /></h1>
-                <div className='row'>   
-                    <input type="text" placeholder='Enter a task...' value={newTask} onChange={handleInputChange} className='task-input-field' />
-                    <button className='add-button' onClick={addTask}>
-                        Add
+  return (
+    <div className='container'>
+        <h1 className='label'>
+            To-Do List
+            <img src="/notebook-icon.png" alt="notebook-icon" className='notebook-icon-img' />
+        </h1>
+        <div className='task-input-field'>
+            <input
+                type="text"
+                value={taskInput}
+                onChange={(e) => setTaskInput(e.target.value)}
+                placeholder="Enter a task..."
+            />
+            <button onClick={handleAddTask}>
+                {editingIndex !== null ? 'Update' : 'Add'}
+            </button>
+        </div>
+        <ul>
+            {tasks.map((task, index) => (
+            <li key={index} className={task.checked ? 'checked-task' : ''}>
+                <div className='task-content'>
+                    {/* Render empty or checked circle icon based on task's checked state */}
+                    {task.checked ? (
+                    <FaRegCircleCheck onClick={() => handleToggleTask(index)} />
+                    ) : (
+                    <FaRegCircle onClick={() => handleToggleTask(index)} />
+                    )}
+                    <span>{task.text}</span>
+                </div>
+                <div className='task-buttons'>
+                    <button className='edit-button' onClick={() => handleEditTask(index)}>
+                        <FaEdit />
+                    </button>
+                    <button className='delete-button' onClick={() => handleDeleteTask(index)}>
+                        <FaTrash />
                     </button>
                 </div>
-                <ul>
-                    {tasks.map((task, index) => <li key={index} onClick={handleItemClick}>
-                        <span className='text'>{task}</span>
-                        <button className='move-down-button' onClick={() => moveTaskDown(index)}>
-                            <img src="./src/assets/down-icon.png" alt="Move down" className='move-down-button-img' />
-                        </button>
-                        <button className='move-up-button' onClick={() => moveTaskUp(index)}>
-                            <img src="./src/assets/up-icon.png" alt="Move up" className='move-up-button-img' />
-                        </button>
-                        <button className='delete-button' onClick={() => deleteTask(index)}>
-                            <img src="./src/assets/delete-button.png" alt="Delete" className='delete-button-img' />
-                        </button>
-                    </li>)}
-                </ul>
-            </div>
-        </div>
-    );
+            </li>
+            ))}
+        </ul>
+    </div>
+  );
 }
 
-export default TodoList
+export default App;

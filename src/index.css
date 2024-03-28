@@ -2,391 +2,208 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: monospace, sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
-.container {
-  background-image: url(assets/background.jpg);
+body {
+  background-image: url('/background.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
   width: 100%;
-  min-height: 100vh;
-  padding: 10px;
+  height: 100vh;
 }
 
-.to-do-list {
+.container {
+  margin: 5rem 10%;
+  padding: 2rem 3rem;
   width: 100%;
-  max-width: 1000px;
+  max-width: 80%;
   background-color: white;
-  margin: 100px auto 20px;
-  padding: 40px 30px 70px;
-  border-radius: 10px;
+  border-radius: 2rem;
 }
 
 .label {
-  font-size: 40px;
+  font-size: 2.2rem;
   color: black;
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
 }
 
 .notebook-icon-img {
-  width: 30px;
-  height: 30px;
-  margin-left: 10px;
+  width: 2rem;
+  height: 2rem;
+  margin-left: 1rem;
 }
 
-.row {
+.task-input-field {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: whitesmoke;
-  border-radius: 30px;
-  padding-left: 20px;
-  margin-bottom: 25px;
+  border-radius: 1.5rem;
+  padding-left: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-.task-input-field {
+.task-input-field input{
   flex: 1;
   border: none;
   outline: none;
   background: transparent;
-  padding: 10px;
-  font-size: 20px;
+  padding: 0.8rem;
+  font-size: 1.2rem;
 }
 
-.add-button {
+.task-input-field button{
   border: none;
   outline: none;
-  padding: 16px 50px;
-  background-color: seagreen;
+  padding: 1rem 2rem;
+  background-color: #19803f;
   color: white;
-  font-size: 20px;
+  font-size: 1rem;
   cursor: pointer;
-  border-radius: 40px;
+  border-radius: 1.5rem;
+  transition: 0.3s ease;
 }
 
-.add-button:hover {
-  background-color: green;
+.task-input-field button:hover{
+  background-color: #16b54f;
+}
+
+.checked-task {
+  text-decoration: line-through;
+  color: gray;
 }
 
 ul li {
-  list-style: none;
-  font-size: 20px;
-  padding: 12px 8px 12px 50px;
-  user-select: none;
-  cursor: pointer;
-  position: relative;
-  margin-bottom: 8px;
+  display: flex;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  transition: 0.3s ease;
 }
 
-ul li::before {
-  content: '';
-  position: absolute;
-  height: 28px;
-  width: 28px;
-  border-radius: 50%;
-  background-image: url("./assets/uncheck.png");
-  background-size: cover;
-  background-position: center;
-  top: 11px;
-  left: 8px;
-  transition: 0.4s ease;
+.task-content {
+  width: 90%;
+  font-size: 1.2rem;
 }
 
-ul li.checked {
-  color: gray;
-  text-decoration: line-through;
+.task-content svg{
+  cursor: pointer;;
+  padding-top: 4px;
+  margin-right: 0.5rem;
 }
 
-ul li.checked::before {
-  background-image: url("./assets/check.png");
+.task-buttons {
+  width: 10%;
+  display: flex;
+  justify-content: space-between;
 }
 
-.move-down-button {
-  position: absolute;
-  right: 100px;
-  top: 5px;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
+.task-buttons button {
+  width: 50%;
   border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: 0.4s ease;
   background-color: white;
+  cursor: pointer;
+  transition: 0.3s ease;
 }
 
-.move-up-button {
-  position: absolute;
-  right: 50px;
-  top: 5px;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: 0.4s ease;
-  background-color: white;
+.edit-button {
+  color: #214d8f;
+}
+
+.edit-button:hover {
+  color: #5690d6;
 }
 
 .delete-button {
-  position: absolute;
-  right: 0;
-  top: 5px;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: 0.4s ease;
-  background-color: white;
+  color: #a82f2f;
 }
 
-.move-down-button:hover, .move-up-button:hover, .delete-button:hover {
-  background-color: lightgray;
+.delete-button:hover {
+  color: #c94f4f;
 }
 
-.move-down-button-img, .move-up-button-img{
-  margin-top: 5px;
-  width: 30px;
-  height: 30px;
-}
-
-.delete-button-img {
-  margin-top: 8px;
-  width: 25px;
-  height: 25px;
-}
-
-.text {
-  flex: 1; 
+.task-buttons svg {
+  font-size: 1.2rem;
 }
 
 @media (max-width:768px) {
-  .container {
-    min-width: 768px;
+  .label {
+    font-size: 1.7rem;
+  }
+  
+  .notebook-icon-img {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .task-input-field input{
+    font-size: 0.8rem;
+  }
+  
+  .task-input-field button{
+    font-size: 0.7rem;
+  }
+
+  .task-content {
+    font-size: 0.8rem;
+  }
+
+  .task-buttons svg {
+    font-size: 0.8rem;
   }
 }
 
-@media (max-width:425px) {
-  .container {
-    min-width: 425px;
-  }
-
+@media (max-width:540px) {
   .label {
-    font-size: 20px;
+    font-size: 1rem;
   }
-
+  
   .notebook-icon-img {
-    width: 20px;
-    height: 20px;
-    margin-left: 10px;
+    width: 1rem;
+    height: 1rem;
   }
 
   .task-input-field {
-    font-size: 14px;
+    margin-bottom: 1rem;
   }
 
-  .add-button {
-    padding: 16px 30px;
-    font-size: 14px;
-  }
-
-  ul li {
-    font-size: 12px;
-    padding: 12px 8px 12px 40px;
+  .task-input-field input{
+    font-size: 0.5rem;
+    padding: 0rem;
   }
   
-  ul li::before {
-    height: 20px;
-    width: 20px;
-    top: 10px;
-    left: 8px;
-  }
-  
-  .move-down-button {
-    right: 70px;
-    top: 8px;
-    width: 30px;
-    height: 30px;
-  }
-  
-  .move-up-button {
-    right: 35px;
-    top: 8px;
-    width: 30px;
-    height: 30px;
-  }
-  
-  .delete-button {
-    right: 0;
-    top: 8px;
-    width: 30px;
-    height: 30px;
-  }
-  
-  .move-down-button-img, .move-up-button-img{
-    margin-top: 5px;
-    width: 20px;
-    height: 20px;
-  }
-  
-  .delete-button-img {
-    margin-top: 5px;
-    width: 17px;
-    height: 17px;
-  }
-}
-
-@media (max-width:375px) {
-  .container {
-    min-width: 375px;
-  }
-
-  .label {
-    font-size: 16px;
-  }
-
-  .notebook-icon-img {
-    width: 16px;
-    height: 16px;
-    margin-left: 10px;
-  }
-
-  .task-input-field {
-    font-size: 10px;
-  }
-
-  .add-button {
-    padding: 16px 24px;
-    font-size: 10px;
+  .task-input-field button{
+    font-size: 0.5rem;
+    padding: 0.5rem 1rem;
   }
 
   ul li {
-    font-size: 8px;
-    padding: 12px 8px 12px 40px;
-  }
-  
-  ul li::before {
-    height: 16px;
-    width: 16px;
-    top: 8px;
-    left: 8px;
-  }
-  
-  .move-down-button {
-    right: 44px;
-    top: 5px;
-    width: 20px;
-    height: 20px;
-  }
-  
-  .move-up-button {
-    right: 22px;
-    top: 5px;
-    width: 20px;
-    height: 20px;
-  }
-  
-  .delete-button {
-    right: 0;
-    top: 5px;
-    width: 20px;
-    height: 20px;
-  }
-  
-  .move-down-button-img, .move-up-button-img{
-    margin-top: 0px;
-    margin-bottom: 9px;
-    width: 10px;
-    height: 10px;
-  }
-  
-  .delete-button-img {
-    margin-top: 0px;
-    margin-bottom: 9px;
-    width: 9px;
-    height: 9px;
-  }
-}
-
-@media (max-width:320px) {
-  .container {
-    min-width: 320px;
+    margin-bottom: 0.5rem;
   }
 
-  .label {
-    font-size: 16px;
+  .task-content {
+    margin-top: 0.2rem;
+    font-size: 0.5rem;
   }
 
-  .notebook-icon-img {
-    width: 16px;
-    height: 16px;
-    margin-left: 10px;
+  .task-content svg{
+    cursor: pointer;;
+    padding-top: 2.5px;
+    margin-right: 0.5rem;
   }
 
-  .task-input-field {
-    font-size: 10px;
+  .task-buttons svg {
+    font-size: 0.5rem;
   }
 
-  .add-button {
-    padding: 16px 24px;
-    font-size: 10px;
-  }
-
-  ul li {
-    font-size: 8px;
-    padding: 12px 8px 12px 40px;
-  }
-  
-  ul li::before {
-    height: 16px;
-    width: 16px;
-    top: 8px;
-    left: 8px;
-  }
-  
-  .move-down-button {
-    right: 44px;
-    top: 5px;
-    width: 20px;
-    height: 20px;
-  }
-  
-  .move-up-button {
-    right: 22px;
-    top: 5px;
-    width: 20px;
-    height: 20px;
-  }
-  
-  .delete-button {
-    right: 0;
-    top: 5px;
-    width: 20px;
-    height: 20px;
-  }
-  
-  .move-down-button-img, .move-up-button-img{
-    margin-top: 0px;
-    margin-bottom: 9px;
-    width: 10px;
-    height: 10px;
-  }
-  
-  .delete-button-img {
-    margin-top: 0px;
-    margin-bottom: 9px;
-    width: 9px;
-    height: 9px;
+  @media (max-width:426px) {
+    .container {
+      padding: 2rem 2rem;
+    }
   }
 }
