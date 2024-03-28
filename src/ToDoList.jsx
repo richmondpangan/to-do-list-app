@@ -65,7 +65,6 @@ function App() {
     <div className='container'>
         <h1 className='label'>
             To-Do List
-            <img src="./public/notebook-icon.png" alt="notebook-icon" className='notebook-icon-img' />
         </h1>
         <div className='task-input-field'>
             <input
